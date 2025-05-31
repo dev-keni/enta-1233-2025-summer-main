@@ -93,6 +93,7 @@ namespace StarterAssets
         [Tooltip("Camera speed multiplier when aiming")]
         [SerializeField] private float AimSens = 0.5f;
 
+
         // cinemachine
         private float _cinemachineTargetYaw;
         private float _cinemachineTargetPitch;
@@ -106,6 +107,7 @@ namespace StarterAssets
         private float _rotationVelocity;
         private float _verticalVelocity;
         private float _terminalVelocity = 53.0f;
+        private bool IsAiming = false;
 
         // timeout deltatime
         private float _jumpTimeoutDelta;
@@ -236,8 +238,17 @@ namespace StarterAssets
         private void CheckAim()
         {
             if (AimCamera)
+            {
                 AimCamera.gameObject.SetActive(_input.Aim);
-                Debug.Log(_input.Aim);
+                if (_input.Aim == false)
+                {
+                    _animator.SetBool(_animIDAiming, false);
+                }
+                else
+                {
+                    _animator.SetBool(_animIDAiming, true);
+                }
+            }
         }
 
         private void Move()
@@ -282,7 +293,8 @@ namespace StarterAssets
 
             // note: Vector2's != operator uses approximation so is not floating point error prone, and is cheaper than magnitude
             // if there is a move input rotate player when the player is moving
-            if (_input.move != Vector2.zero)
+            // rotate the player based on camera direction when aiming
+            if (_input.move != Vector2.zero && _input.Aim == false)
             {
                 _targetRotation = Mathf.Atan2(inputDirection.x, inputDirection.z) * Mathf.Rad2Deg +
                                   _mainCamera.transform.eulerAngles.y;
@@ -292,9 +304,32 @@ namespace StarterAssets
                 // rotate to face input direction relative to camera position
                 transform.rotation = Quaternion.Euler(0.0f, rotation, 0.0f);
             }
+            if (_input.Aim)
+            {
+                Vector3 camForwardDir = _mainCamera.transform.forward;
+                camForwardDir.y = 0.0f;
 
+                if (camForwardDir.sqrMagnitude > 0.0f)
+                {
+                    transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(camForwardDir), Time.deltaTime * 10.0f);
+                }
+            }
 
-            Vector3 targetDirection = Quaternion.Euler(0.0f, _targetRotation, 0.0f) * Vector3.forward;
+            Vector3 targetDirection;
+
+            // set direction of player depending on aim state
+            if (_input.Aim)
+            {
+                Vector3 camForward = _mainCamera.transform.forward;
+                Vector3 camRight = _mainCamera.transform.right;
+                camForward.y = 0.0f;
+                camRight.y = 0.0f;
+                targetDirection = (camRight * _input.move.x + camForward * _input.move.y).normalized;
+            }
+            else
+            {
+                targetDirection = Quaternion.Euler(0.0f, _targetRotation, 0.0f) * Vector3.forward;
+            }
 
             // move the player
             _controller.Move(targetDirection.normalized * (_speed * Time.deltaTime) +
