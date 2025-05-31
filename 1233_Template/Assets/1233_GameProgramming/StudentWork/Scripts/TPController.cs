@@ -337,7 +337,21 @@ namespace StarterAssets
 
             // update animator if using character
             if (_hasAnimator)
-            {
+            {   
+                // directional checker for strafe animation, doesn't do anything now because of AvatarMask lol
+                if (_input.Aim)
+                {
+                    float strafeX = _input.move.x;
+                    float strafeY = 0f;
+
+                    if (Mathf.Abs(strafeX) > 0.0f)
+                    {
+                        strafeY = 0.5f;
+                    }
+
+                    _animator.SetFloat("StrafeX", strafeX);
+                    _animator.SetFloat("StrafeY", strafeY);
+                }
                 _animator.SetFloat(_animIDSpeed, _animationBlend);
                 _animator.SetFloat(_animIDMotionSpeed, inputMagnitude);
             }
