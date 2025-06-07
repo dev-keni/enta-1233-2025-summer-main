@@ -10,9 +10,9 @@ namespace MyCharacterInput
 
         [SerializeField] private Rigidbody rb;
 
-        private ShooterManager shooterManager;
+        private BaseBulletManager shooterManager;
 
-        public void Initialize(ShooterManager manager)
+        public void Initialize(BaseBulletManager manager)
         {
             shooterManager = manager;
         }
