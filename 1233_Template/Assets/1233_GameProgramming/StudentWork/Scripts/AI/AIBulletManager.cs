@@ -1,24 +1,13 @@
 using MyCharacterInput;
+using UnityEngine.AI;
 using UnityEngine;
 
 public class AIBulletManager : BaseBulletManager
 {
-    [SerializeField] private Transform BulletSpawnPoint;
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    private Transform PointProjectile;
+    protected void Fire(Transform AimDirection)
     {
-
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        //add way to trigger shooting
-        
-    }
-
-    private void Fire()
-    {
-        SpawnPhysicsBullet(BulletSpawnPoint);
+        PointProjectile = AimDirection;
+        SpawnPhysicsBullet(PointProjectile);
     }
 }

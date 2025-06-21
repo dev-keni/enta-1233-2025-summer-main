@@ -6,9 +6,11 @@ namespace MyCharacterInput
     {
         [SerializeField] private float ProjectileSpeed;
 
-        [SerializeField] private float ProjectileDmg;
+        [SerializeField] private int ProjectileDmg;
 
         [SerializeField] private Rigidbody rb;
+
+        [SerializeField] private LayerMask RaycastMask;
 
         private BaseBulletManager shooterManager;
 
@@ -23,11 +25,24 @@ namespace MyCharacterInput
             rb.AddForce(transform.forward * ProjectileSpeed, ForceMode.Impulse);
         }
 
+        private void OnTriggerEnter(Collider other)
+        {
+            AiPlayerController eHealth = other.GetComponentInParent<AiPlayerController>();
+            if (eHealth != null)
+            {
+                eHealth.OnDMG(ProjectileDmg);
+                shooterManager.OnProjectileCollision(transform.position, transform.rotation.eulerAngles);
+                Destroy(gameObject);
+            }
+            
+        }
+
         void OnCollisionEnter(Collision collision)
         {
             ContactPoint contact = collision.GetContact(0);
+            Debug.Log(contact);
             shooterManager.OnProjectileCollision(contact.point, contact.normal);
-            Destroy(gameObject);
+            //Destroy(gameObject);
         }
 
     }

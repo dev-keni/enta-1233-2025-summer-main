@@ -1,9 +1,9 @@
 using UnityEngine;
 
-public class AiPlayerController : MonoBehaviour
+public class EnemyHealth : MonoBehaviour
 {
     [SerializeField] private int MaxHealth;
-    private int Health;
+    public int Health;
 
     void Start()
     {

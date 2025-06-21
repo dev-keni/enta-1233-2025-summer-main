@@ -2,7 +2,6 @@ using UnityEngine;
 
 public class CharacterManager : MonoBehaviour
 {
-    public int Health = 100;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     [SerializeField] private GameObject characterPrefab;
 
