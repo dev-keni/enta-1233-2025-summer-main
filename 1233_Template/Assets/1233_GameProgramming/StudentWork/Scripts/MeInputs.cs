@@ -1,6 +1,7 @@
 using UnityEngine;
 #if ENABLE_INPUT_SYSTEM
 using UnityEngine.InputSystem;
+using UnityEngine.InputSystem.LowLevel;
 #endif
 
 namespace MyCharacterInput
@@ -14,9 +15,12 @@ namespace MyCharacterInput
 		public bool sprint;
 		public bool Aim { get; private set; } //only this script can edit this bool
 
-		public bool Shoot; 
+		public bool Shoot;
 
-		[Header("Movement Settings")]
+        public bool Primary;
+        public bool Secondary;
+
+        [Header("Movement Settings")]
 		public bool analogMovement;
 
 		[Header("Mouse Cursor Settings")]
@@ -52,7 +56,17 @@ namespace MyCharacterInput
 			ShootInput(value.isPressed);
 		}
 
-		public void OnSprint(InputValue value)
+        public void OnPrimary(InputValue value)
+        {
+            PrimaryInput(value.isPressed);
+        }
+
+        public void OnSecondary(InputValue value)
+        {
+            SecondaryInput(value.isPressed);
+        }
+
+        public void OnSprint(InputValue value)
 		{
 			SprintInput(value.isPressed);
 		}
@@ -84,7 +98,17 @@ namespace MyCharacterInput
 			Shoot = newShootState;
 		}
 
-		public void SprintInput(bool newSprintState)
+        public void PrimaryInput(bool newState)
+        {
+            Primary = newState;
+        }
+
+        public void SecondaryInput(bool newState)
+        {
+            Secondary = newState;
+        }
+
+        public void SprintInput(bool newSprintState)
 		{
 			sprint = newSprintState;
 		}

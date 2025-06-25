@@ -8,7 +8,6 @@ namespace MyCharacterInput
         [SerializeField] private GameObject BulletParticle;
         [SerializeField] private LayerMask RaycastMask;
         [SerializeField] private int Damage;
-        private float timer;
 
         protected void SpawnPhysicsBullet(Transform shootersTransform)
         {
@@ -43,10 +42,9 @@ namespace MyCharacterInput
             }
         }
 
-        private void SpawnParticle(Vector3 pos, Vector3 ro)
+        public void SpawnParticle(Vector3 pos, Vector3 ro)
         {
             Instantiate(BulletParticle, pos, Quaternion.Euler(ro));
-
         }
         
     }

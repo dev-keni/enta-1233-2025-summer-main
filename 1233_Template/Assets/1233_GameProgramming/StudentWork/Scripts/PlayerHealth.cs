@@ -1,7 +1,29 @@
 using UnityEngine;
-
-public class PlayerHealth : MonoBehaviour
+using MyCharacterInput;
+namespace MyCharacterInput
 {
-    [SerializeField] private int Health;
-    [SerializeField] private int MaxHealth;
+    public class PlayerHealth : MonoBehaviour
+    {
+        [SerializeField] private int MaxHealth;
+        [SerializeField] private int Health;
+        
+
+        private void Awake()
+        {
+            Health = MaxHealth;
+        }
+        public void OnDMG(int Damage)
+        {
+            Health -= Damage;
+            if (Health <= 0)
+            {
+                Die();
+            }
+        }
+
+        private void Die()
+        {
+            Destroy(gameObject);
+        }
+    }
 }

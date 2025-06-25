@@ -11,6 +11,12 @@ namespace MyCharacterInput
 
         [SerializeField] private MeInputs Inputs;
 
+        [SerializeField] private GameObject PrimModel;
+        [SerializeField] private GameObject PrimModelStored;
+        [SerializeField] private GameObject SecModel;
+        [SerializeField] private GameObject SecModelStored;
+
+
         [SerializeField] private ShootType ShootingCalculation;
 
         public enum ShootType
@@ -26,6 +32,12 @@ namespace MyCharacterInput
                 OnFirePressed();
             }
             Inputs.Shoot = false;
+            if (Inputs.Primary)
+            {
+                EquipWeapon();
+                Inputs.Primary = false;
+            }
+            
 
         }
 
@@ -38,6 +50,34 @@ namespace MyCharacterInput
                     break;
                 case ShootType.Physics:
                     SpawnPhysicsBullet(Cam.transform);
+                    break;
+                default:
+                    Debug.Log("ERROR");
+                    break;
+            }
+        }
+
+        private void EquipWeapon()
+        {
+            switch (ShootingCalculation)
+            {
+                case ShootType.Raycast:
+                    ShootingCalculation = ShootType.Physics;
+                    PrimModel.SetActive(false);
+                    SecModel.SetActive(true);
+                    PrimModelStored.SetActive(true);
+                    SecModelStored.SetActive(false);
+                    Inputs.Primary = false;
+                    Debug.Log("Equipped projectile");
+                    break;
+                case ShootType.Physics:
+                    ShootingCalculation = ShootType.Raycast;
+                    PrimModel.SetActive(true);
+                    SecModel.SetActive(false);
+                    PrimModelStored.SetActive(false);
+                    SecModelStored.SetActive(true);
+                    Inputs.Primary = false;
+                    Debug.Log("Equipped raycast");
                     break;
                 default:
                     Debug.Log("ERROR");

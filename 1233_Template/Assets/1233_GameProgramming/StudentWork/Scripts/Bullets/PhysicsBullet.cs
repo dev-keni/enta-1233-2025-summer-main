@@ -14,6 +14,8 @@ namespace MyCharacterInput
 
         private BaseBulletManager shooterManager;
 
+        private bool hasHit = false;
+
         public void Initialize(BaseBulletManager manager)
         {
             shooterManager = manager;
@@ -27,22 +29,45 @@ namespace MyCharacterInput
 
         private void OnTriggerEnter(Collider other)
         {
+            if (hasHit) return; 
+
+            shooterManager.SpawnParticle(transform.position, transform.rotation.eulerAngles);
             AiPlayerController eHealth = other.GetComponentInParent<AiPlayerController>();
             if (eHealth != null)
             {
+                hasHit = true;
                 eHealth.OnDMG(ProjectileDmg);
-                shooterManager.OnProjectileCollision(transform.position, transform.rotation.eulerAngles);
-                Destroy(gameObject);
             }
-            
+            PlayerHealth pHealth = other.GetComponentInParent<PlayerHealth>();
+            if (eHealth != null)
+            {
+                hasHit = true;
+                pHealth.OnDMG(ProjectileDmg);
+            }
+            Destroy(gameObject);
+
         }
 
-        void OnCollisionEnter(Collision collision)
+        private void OnCollisionEnter(Collision collision)
         {
-            ContactPoint contact = collision.GetContact(0);
-            Debug.Log(contact);
-            shooterManager.OnProjectileCollision(contact.point, contact.normal);
-            //Destroy(gameObject);
+            if (hasHit) return;
+            Debug.Log(collision.collider);
+            shooterManager.SpawnParticle(transform.position, transform.rotation.eulerAngles);
+            AiPlayerController eHealth = collision.collider.GetComponentInParent<AiPlayerController>();
+            if (eHealth != null)
+            {
+                hasHit = true;
+                eHealth.OnDMG(ProjectileDmg);
+            }
+            PlayerHealth pHealth = collision.collider.GetComponentInParent<PlayerHealth>();
+            if (pHealth != null)
+            {
+                hasHit = true;
+                pHealth.OnDMG(ProjectileDmg);
+            }
+
+
+            Destroy(gameObject);
         }
 
     }
