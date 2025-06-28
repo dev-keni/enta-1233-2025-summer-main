@@ -8,17 +8,18 @@ namespace MyCharacterInput {
         [SerializeField] private TMP_Text HealthText;
         [SerializeField] private TMP_Text ScoreText;
         [SerializeField] private TMP_Text AmmoText;
+        public PlayerHealth PlayerHealth;
 
-        void Update()
+        void Awake()
         {
-
+            HealthText.text = $"+{PlayerHealth.Health}";
         }
 
         public void AddScore() { }
 
         public void OnHealthUpdated()
         {
-            //HealthText = gameObject.GetComponent<PlayerHealth>();
+            HealthText.text = $"+{PlayerHealth.Health}";
         }
 
         public void OnScoreUpdated(int score)

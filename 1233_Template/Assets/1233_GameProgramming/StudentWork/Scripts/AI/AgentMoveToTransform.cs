@@ -30,7 +30,8 @@ public class AgentMoveToTransform : AIBulletManager
             if (Cooldown <= 0f)
             {
                 Fire(AgentWeapon.transform);
-                Debug.Log("SHOTTED");
+                AgentWeapon.GetComponent<AudioSource>().Play();
+                //Debug.Log("SHOTTED");
                 Cooldown = BulletDelay;
             }
         }

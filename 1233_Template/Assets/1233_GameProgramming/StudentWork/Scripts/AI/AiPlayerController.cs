@@ -1,26 +1,63 @@
+using MyCharacterInput;
 using UnityEngine;
-
-public class AiPlayerController : MonoBehaviour
+using System.Collections;
+namespace MyCharacterInput
 {
-    [SerializeField] private int MaxHealth;
-    private int Health;
-
-    void Start()
+    public class AiPlayerController : MonoBehaviour
     {
-        Health = MaxHealth;
-    }
+        [SerializeField] private GameObject AgentCharacter;
+        [SerializeField] private GameObject MedkitPrefab;
+        [SerializeField] private int MaxHealth;
+        private int Health;
 
-    public void OnDMG(int Damage)
-    {
-        Health -= Damage;
-        if (Health <= 0)
+        private Vector3 medOffset = new Vector3 (0,1,0);
+
+        public Color dmgColor = Color.red;
+        public float dmgColorDuration = 0.2f;
+
+        private MeshRenderer meshRenderer;
+        private Color ogColor;
+        protected bool isDmgd = false;
+
+        void Start()
         {
-            Die();
+            Health = MaxHealth;
+            meshRenderer = GetComponent<MeshRenderer>();
+            if (meshRenderer != null)
+            {
+                ogColor = meshRenderer.material.color;
+            }
         }
-    }
 
-    private void Die()
-    {
-        Destroy(gameObject);
+        public void OnDMG(int Damage)
+        {
+            Health -= Damage;
+            StartCoroutine(DamageFlash());
+            if (Health <= 0)
+            {
+                Die();
+            }
+        }
+
+        IEnumerator DamageFlash()
+        {
+            isDmgd = true;
+            if (meshRenderer != null)
+            {
+                meshRenderer.material.color = dmgColor;
+            }
+            yield return new WaitForSeconds(dmgColorDuration);
+            if (meshRenderer != null)
+            {
+                meshRenderer.material.color = ogColor;
+            }
+            isDmgd = false;
+        }
+
+        private void Die()
+        {
+            Instantiate(MedkitPrefab, AgentCharacter.transform.position-medOffset, AgentCharacter.transform.rotation);
+            Destroy(gameObject);
+        }
     }
 }

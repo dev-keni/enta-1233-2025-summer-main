@@ -4,8 +4,9 @@ namespace MyCharacterInput
 {
     public class PlayerHealth : MonoBehaviour
     {
-        [SerializeField] private int MaxHealth;
-        [SerializeField] private int Health;
+        [SerializeField] public int MaxHealth;
+        [SerializeField] public int Health;
+        [SerializeField] PlayerHUD PlayerHUD;
         
 
         private void Awake()
@@ -15,10 +16,21 @@ namespace MyCharacterInput
         public void OnDMG(int Damage)
         {
             Health -= Damage;
+            PlayerHUD.OnHealthUpdated();
             if (Health <= 0)
             {
                 Die();
             }
+        }
+
+        public void OnHeal(int Heal)
+        {
+            Health += Heal;
+            if (Health > MaxHealth)
+            {
+                Health = MaxHealth;
+            }
+            PlayerHUD.OnHealthUpdated();
         }
 
         private void Die()

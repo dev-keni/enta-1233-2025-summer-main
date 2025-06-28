@@ -16,6 +16,8 @@ namespace MyCharacterInput
         [SerializeField] private GameObject SecModel;
         [SerializeField] private GameObject SecModelStored;
 
+        [SerializeField] private GameObject SoundMuzzle;
+        private AudioSource FiringSound;
 
         [SerializeField] private ShootType ShootingCalculation;
 
@@ -43,13 +45,16 @@ namespace MyCharacterInput
 
         private void OnFirePressed()
         {
+            FiringSound = SoundMuzzle.GetComponent<AudioSource>();
             switch (ShootingCalculation)
             {
                 case ShootType.Raycast:
                     DoRaycastShot(Cam.transform);
+                    FiringSound.Play();
                     break;
                 case ShootType.Physics:
                     SpawnPhysicsBullet(Cam.transform);
+                    FiringSound.Play();
                     break;
                 default:
                     Debug.Log("ERROR");

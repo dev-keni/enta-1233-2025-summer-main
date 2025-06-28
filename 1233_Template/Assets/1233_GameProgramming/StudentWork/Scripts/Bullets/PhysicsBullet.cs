@@ -27,7 +27,7 @@ namespace MyCharacterInput
             rb.AddForce(transform.forward * ProjectileSpeed, ForceMode.Impulse);
         }
 
-        private void OnTriggerEnter(Collider other)
+        private void OnTriggerEnter(Collider other) //FOR MY OWN REFERENCE
         {
             if (hasHit) return; 
 
@@ -51,7 +51,7 @@ namespace MyCharacterInput
         private void OnCollisionEnter(Collision collision)
         {
             if (hasHit) return;
-            Debug.Log(collision.collider);
+            //Debug.Log(collision.collider);
             shooterManager.SpawnParticle(transform.position, transform.rotation.eulerAngles);
             AiPlayerController eHealth = collision.collider.GetComponentInParent<AiPlayerController>();
             if (eHealth != null)
