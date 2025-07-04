@@ -28,7 +28,7 @@ namespace MyCharacterInput
 
             if (Physics.Raycast(camTransform.position, camTransform.forward, out RaycastHit hit, Mathf.Infinity, RaycastMask))
             {
-                Debug.Log("Raycast Hit");
+                //Debug.Log("Raycast Hit");
                 AiPlayerController eHealth = hit.transform.gameObject.GetComponentInParent<AiPlayerController>();
                 if (eHealth != null)
                 {
@@ -38,7 +38,7 @@ namespace MyCharacterInput
             }
             else
             {
-                Debug.Log("Raycast Miss");
+                //Debug.Log("Raycast Miss");
             }
         }
 

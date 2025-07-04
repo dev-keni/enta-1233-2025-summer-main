@@ -11,7 +11,7 @@ public class AgentMoveToTransform : AIBulletManager
     [SerializeField] private GameObject Target;
 
     private Vector3 AgentLocation;
-    private float DetectionRadius = 5.0f;
+    private float DetectionRadius = 10.0f;
     private bool PlayerDetected = false;
 
     private float BulletDelay = 1.5f;

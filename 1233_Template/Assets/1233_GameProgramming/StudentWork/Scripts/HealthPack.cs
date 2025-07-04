@@ -1,4 +1,5 @@
-using System.Collections.Generic;
+using System.Collections;
+using System.Drawing;
 using UnityEngine;
 namespace MyCharacterInput
 {
@@ -19,10 +20,20 @@ namespace MyCharacterInput
             PlayerHealth pHealth = other.GetComponentInParent<PlayerHealth>();
             if (pHealth != null && pHealth.Health != pHealth.MaxHealth)
             {
-                AudioSource1.Play();
+                
                 pHealth.OnHeal(HealAmount);
-                Destroy(gameObject);
+                StartCoroutine(PlayAudio());
+                
             }
+        }
+
+        IEnumerator PlayAudio()
+        {
+            AudioSource1.Play();
+            yield return new WaitForSecondsRealtime(0.3f);
+            gameObject.SetActive(false);
+            yield return new WaitForSecondsRealtime(1);
+            Destroy(gameObject);
         }
     }
 }

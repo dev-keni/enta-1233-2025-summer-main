@@ -73,7 +73,7 @@ namespace MyCharacterInput
                     PrimModelStored.SetActive(true);
                     SecModelStored.SetActive(false);
                     Inputs.Primary = false;
-                    Debug.Log("Equipped projectile");
+                    //Debug.Log("Equipped projectile");
                     break;
                 case ShootType.Physics:
                     ShootingCalculation = ShootType.Raycast;
@@ -82,7 +82,7 @@ namespace MyCharacterInput
                     PrimModelStored.SetActive(false);
                     SecModelStored.SetActive(true);
                     Inputs.Primary = false;
-                    Debug.Log("Equipped raycast");
+                    //Debug.Log("Equipped raycast");
                     break;
                 default:
                     Debug.Log("ERROR");

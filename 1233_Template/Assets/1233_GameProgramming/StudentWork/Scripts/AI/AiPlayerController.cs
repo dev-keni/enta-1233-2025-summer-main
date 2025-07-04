@@ -10,7 +10,7 @@ namespace MyCharacterInput
         [SerializeField] private int MaxHealth;
         private int Health;
 
-        private Vector3 medOffset = new Vector3 (0,1,0);
+        private Vector3 medOffset = new Vector3 (0,0.5f,0);
 
         public Color dmgColor = Color.red;
         public float dmgColorDuration = 0.2f;

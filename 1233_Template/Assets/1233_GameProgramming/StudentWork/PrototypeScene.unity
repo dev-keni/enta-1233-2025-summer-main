@@ -2310,6 +2310,18 @@ PrefabInstance:
       propertyPath: m_margin.y
       value: 15.719139
       objectReference: {fileID: 0}
+    - target: {fileID: 1731024268279832138, guid: 490e0e2a807be394a91ed13095be7179, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 363.7986
+      objectReference: {fileID: 0}
+    - target: {fileID: 1731024268279832138, guid: 490e0e2a807be394a91ed13095be7179, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 174.743
+      objectReference: {fileID: 0}
+    - target: {fileID: 1731024268279832138, guid: 490e0e2a807be394a91ed13095be7179, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -750.4
+      objectReference: {fileID: 0}
     - target: {fileID: 1944241141394706066, guid: 490e0e2a807be394a91ed13095be7179, type: 3}
       propertyPath: m_UiScaleMode
       value: 1
