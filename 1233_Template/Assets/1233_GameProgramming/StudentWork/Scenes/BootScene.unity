@@ -1314,7 +1314,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &833148407
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2126,7 +2126,7 @@ GameObject:
   - component: {fileID: 1269962147}
   - component: {fileID: 1269962146}
   m_Layer: 0
-  m_Name: Play
+  m_Name: Replay
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2902,11 +2902,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b9b5f0bdc43cfde4882e313740b8f5e2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Main: {fileID: 296160175}
+  Main: {fileID: 1300175745}
+  SettingsScreen: {fileID: 1143938246}
+  GameOver: {fileID: 854873481}
   Play: {fileID: 316165923}
+  Replay: {fileID: 1269962146}
   Settings: {fileID: 1961524617}
   Quit: {fileID: 395846843}
-  gameManager: {fileID: 833148406}
+  gameManager: {fileID: 833148407}
   mainMenu: {fileID: 1556487931}
   eventSystem: {fileID: 1846036232}
   menuCamera: {fileID: 2105334028}
