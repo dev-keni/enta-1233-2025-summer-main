@@ -27,8 +27,14 @@ namespace MyCharacterInput
 		public bool cursorLocked = true;
 		public bool cursorInputForLook = true;
 
+        private void Awake()
+        {
+			SetCursorState(false);
+        }
+
+
 #if ENABLE_INPUT_SYSTEM
-		public void OnMove(InputValue value)
+        public void OnMove(InputValue value)
 		{
 			MoveInput(value.Get<Vector2>());
 		}
@@ -43,7 +49,7 @@ namespace MyCharacterInput
 
 		public void OnJump(InputValue value)
 		{
-			JumpInput(value.isPressed);
+            JumpInput(value.isPressed);
 		}
 
 		public void OnAim(InputValue value)
@@ -120,7 +126,9 @@ namespace MyCharacterInput
 
 		private void SetCursorState(bool newState)
 		{
-			Cursor.lockState = newState ? CursorLockMode.Locked : CursorLockMode.None;
+			Cursor.lockState = CursorLockMode.Locked;
+			//Cursor.visible = false;
+			//newState ? CursorLockMode.Locked : CursorLockMode.None;
 		}
 	}
 	

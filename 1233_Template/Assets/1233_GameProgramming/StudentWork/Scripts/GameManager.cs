@@ -1,3 +1,4 @@
+using UnityEditor.SearchService;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
@@ -6,26 +7,26 @@ public class GameManager : MonoBehaviour
     // Encapsulation
     public static GameManager Instance { get; private set; }
 
-    private CharacterManager characterManager;
-    private LevelManager levelManager;
+    [SerializeField] private CharacterManager characterManager;
+    [SerializeField] private LevelManager levelManager;
 
     private void Awake()
     {
-        if (Instance != null && Instance != this)
+        /*if (Instance != null && Instance != this)
         {
             Destroy(gameObject);
             return;
         }
 
         Instance = this;
-        DontDestroyOnLoad(gameObject);
+        DontDestroyOnLoad(gameObject);*/
 
-        InitializeGame();
+        //InitializeGame();
     }
 
     public void InitializeGame()
     {
-        //levelManager.LoadLevelAdditively("SimpleLevel");
-        //characterManager.SpawnCharacter();
+        levelManager.LoadLevelAdditively("PrototypeScene");
+        characterManager.SpawnCharacter();
     }
 }

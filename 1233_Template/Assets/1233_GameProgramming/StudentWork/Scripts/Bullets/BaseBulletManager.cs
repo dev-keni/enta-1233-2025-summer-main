@@ -1,5 +1,6 @@
 using MyCharacterInput;
 using UnityEngine;
+using System.Collections;
 namespace MyCharacterInput
 {
     public class BaseBulletManager : MonoBehaviour
@@ -44,9 +45,16 @@ namespace MyCharacterInput
 
         public void SpawnParticle(Vector3 pos, Vector3 ro)
         {
-            Instantiate(BulletParticle, pos, Quaternion.Euler(ro));
+            GameObject particle = Instantiate(BulletParticle, pos, Quaternion.Euler(ro));
+            StartCoroutine(CleanParticle(particle));
         }
-        
+
+        IEnumerator CleanParticle(GameObject particle)
+        {
+            yield return new WaitForSecondsRealtime(1);
+            Destroy(particle);
+        }
+
     }
 
 }

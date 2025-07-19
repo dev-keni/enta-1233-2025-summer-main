@@ -7,11 +7,14 @@ namespace MyCharacterInput
         [SerializeField] public int MaxHealth;
         [SerializeField] public int Health;
         [SerializeField] PlayerHUD PlayerHUD;
-        
+
+        [SerializeField] public CharacterManager characterManager;
+
 
         private void Awake()
         {
             Health = MaxHealth;
+            characterManager = this.transform.parent.parent.GetComponent<CharacterManager>();
         }
         public void OnDMG(int Damage)
         {
@@ -35,7 +38,8 @@ namespace MyCharacterInput
 
         private void Die()
         {
-            Destroy(gameObject);
+            characterManager.ResetMenu();
+            Destroy(this.transform.parent.gameObject);
         }
     }
 }

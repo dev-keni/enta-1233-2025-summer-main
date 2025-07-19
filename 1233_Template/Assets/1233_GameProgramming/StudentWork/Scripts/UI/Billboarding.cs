@@ -17,6 +17,6 @@ public class Billboarding : MonoBehaviour
 
     private void LateUpdate()
     {
-        transform.forward = Cam.transform.forward;
+        //transform.forward = Cam.transform.forward;
     }
 }
