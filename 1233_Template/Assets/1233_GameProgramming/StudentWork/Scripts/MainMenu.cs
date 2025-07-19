@@ -39,7 +39,7 @@ public class MainMenu : MonoBehaviour
     public void Reawaken()
     {
         mainMenu.SetActive(true);
-        Main.gameObject.SetActive(false);
+        Controls.gameObject.SetActive(false);
         GameOver.gameObject.SetActive(true);
         eventSystem.SetActive(true);
         menuCamera.SetActive(true);
