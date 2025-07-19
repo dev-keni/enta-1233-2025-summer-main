@@ -15,6 +15,11 @@ namespace MyCharacterInput {
             HealthText.text = $"+{PlayerHealth.Health}";
         }
 
+        private void Update()
+        {
+            
+        }
+
         public void AddScore() { }
 
         public void OnHealthUpdated()
