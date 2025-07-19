@@ -7,10 +7,14 @@ using System.Collections;
 public class MainMenu : MonoBehaviour
 {
     [SerializeField] public Canvas Main;
+    [SerializeField] public Canvas Controls;
     [SerializeField] public Canvas SettingsScreen;
     [SerializeField] public Canvas GameOver;
+
     [SerializeField] public Button Play;
+    [SerializeField] public Button MenuPlay;
     [SerializeField] public Button Replay;
+
     [SerializeField] private Button Settings;
     [SerializeField] private Button Quit;
 
@@ -22,10 +26,17 @@ public class MainMenu : MonoBehaviour
     void Awake()
     {
         Play.onClick.AddListener(ClickPlay);
+        MenuPlay.onClick.AddListener(OpenControls);
         Replay.onClick.AddListener(ClickPlay);
         mainMenu.SetActive(true);
         eventSystem.SetActive(true);
         menuCamera.SetActive(true);
+    }
+
+    void OpenControls()
+    {
+        Main.gameObject.SetActive(false);
+        Controls.gameObject.SetActive(true);
     }
 
     void ClickPlay()
