@@ -9,9 +9,10 @@ namespace MyCharacterInput
         [SerializeField] private AudioSource AudioSource1;
         [SerializeField] private GameObject Mesh;
 
+        private float degreesPerSecond = 20.0f;
         private void Update()
         {
-            Spin(Mesh);
+            Spin(Mesh,degreesPerSecond);
         }
 
         private void OnTriggerEnter(Collider other)

@@ -26,8 +26,10 @@ public class MainMenu : MonoBehaviour
     void Awake()
     {
         Play.onClick.AddListener(ClickPlay);
-        MenuPlay.onClick.AddListener(OpenControls);
         Replay.onClick.AddListener(ClickPlay);
+
+        MenuPlay.onClick.AddListener(OpenControls);
+        
         mainMenu.SetActive(true);
         eventSystem.SetActive(true);
         menuCamera.SetActive(true);
@@ -45,6 +47,11 @@ public class MainMenu : MonoBehaviour
         mainMenu.SetActive(false);
         eventSystem.SetActive(false);
         menuCamera.SetActive(false);
+    }
+
+    void QuitGame()
+    {
+        Application.Quit();
     }
 
     public void Reawaken()

@@ -3,24 +3,24 @@ using UnityEngine;
 
 public class CharacterManager : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    [SerializeField] private GameObject characterPrefab;
-    [SerializeField] private GameObject spawnPoint;
-    [SerializeField] private LevelManager levelManager;
-    [SerializeField] private MainMenu mainMenu;
+    [SerializeField] private GameObject _characterPrefab;
+    [SerializeField] private GameObject _spawnPoint;
+    [SerializeField] private LevelManager _levelManager;
+    [SerializeField] private MainMenu _mainMenu;
 
-    public GameObject currentCharacter;
+    public GameObject CurrentCharacter;
     
-
+    //Spawn the player at set position
     public void SpawnCharacter()
     {
         Vector3 spawnPosition = new Vector3(-3.17000008f, 1.61314762f, 19.2000008f);
-        currentCharacter = Instantiate(characterPrefab, spawnPosition, Quaternion.identity, transform);
+        CurrentCharacter = Instantiate(_characterPrefab, spawnPosition, Quaternion.identity, transform);
     }
 
+    //Unloads the level and turns the menu back on
     public void ResetMenu()
     {
-        levelManager.UnloadLevel("PrototypeScene");
-        mainMenu.Reawaken();
+        _levelManager.UnloadLevel("PrototypeScene");
+        _mainMenu.Reawaken();
     }
 }

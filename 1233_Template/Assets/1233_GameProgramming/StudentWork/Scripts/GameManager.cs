@@ -6,26 +6,13 @@ public class GameManager : MonoBehaviour
     // Encapsulation
     public static GameManager Instance { get; private set; }
 
-    [SerializeField] private CharacterManager characterManager;
-    [SerializeField] private LevelManager levelManager;
+    [SerializeField] private CharacterManager _characterManager;
+    [SerializeField] private LevelManager _levelManager;
 
-    private void Awake()
-    {
-        /*if (Instance != null && Instance != this)
-        {
-            Destroy(gameObject);
-            return;
-        }
-
-        Instance = this;
-        DontDestroyOnLoad(gameObject);*/
-
-        //InitializeGame();
-    }
-
+    //Load level and spawn player
     public void InitializeGame()
     {
-        levelManager.LoadLevelAdditively("PrototypeScene");
-        characterManager.SpawnCharacter();
+        _levelManager.LoadLevelAdditively("PrototypeScene");
+        _characterManager.SpawnCharacter();
     }
 }

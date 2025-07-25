@@ -1893,8 +1893,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 115f866e30e90a04d88474a2bfeb87d3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  characterManager: {fileID: 1424421074}
-  levelManager: {fileID: 219097643}
+  _characterManager: {fileID: 1424421074}
+  _levelManager: {fileID: 219097643}
 --- !u!4 &833148408
 Transform:
   m_ObjectHideFlags: 0
@@ -3324,11 +3324,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 80fb8ce74e33a3944ad52996a9ccdc34, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  characterPrefab: {fileID: 8035722095722768921, guid: 490e0e2a807be394a91ed13095be7179, type: 3}
-  spawnPoint: {fileID: 0}
-  levelManager: {fileID: 219097643}
-  mainMenu: {fileID: 1556487933}
-  currentCharacter: {fileID: 0}
+  _characterPrefab: {fileID: 8035722095722768921, guid: 490e0e2a807be394a91ed13095be7179, type: 3}
+  _spawnPoint: {fileID: 0}
+  _levelManager: {fileID: 219097643}
+  _mainMenu: {fileID: 1556487933}
+  CurrentCharacter: {fileID: 0}
 --- !u!4 &1424421075
 Transform:
   m_ObjectHideFlags: 0

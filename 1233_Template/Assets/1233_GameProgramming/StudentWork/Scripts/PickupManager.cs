@@ -5,11 +5,13 @@ namespace MyCharacterInput
 {
     public class PickupManager : MonoBehaviour
     {
-        public void Spin(GameObject pickup)
+        //Spinning function
+        public void Spin(GameObject pickup, float degreesPerSecond)
         {
-            pickup.transform.Rotate(new Vector3(0, 1, 0));
+            pickup.transform.Rotate(new Vector3(0, degreesPerSecond * Time.deltaTime, 0));
         }
 
+        //On player touch, disable audio and destroy after delay so the sound can play
         public void ActivatePickup(Collider Touched, AudioSource audio)
         {
             StartCoroutine(PlayAudio(audio));
