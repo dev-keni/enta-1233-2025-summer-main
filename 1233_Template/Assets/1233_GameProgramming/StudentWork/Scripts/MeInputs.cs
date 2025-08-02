@@ -14,11 +14,13 @@ namespace MyCharacterInput
 		public bool jump;
 		public bool sprint;
 		public bool Aim { get; private set; } //only this script can edit this bool
-
-		public bool Shoot;
+        
+        public bool Shoot;
 
         public bool Primary;
         public bool Secondary;
+
+        public bool Pause;
 
         [Header("Movement Settings")]
 		public bool analogMovement;

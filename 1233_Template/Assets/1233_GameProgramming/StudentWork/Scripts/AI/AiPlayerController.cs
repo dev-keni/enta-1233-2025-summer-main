@@ -1,13 +1,15 @@
 using MyCharacterInput;
-using UnityEngine;
 using System.Collections;
+using UnityEngine;
+using UnityEngine.Serialization;
 namespace MyCharacterInput
 {
     public class AiPlayerController : MonoBehaviour
     {
         [SerializeField] private GameObject AgentCharacter;
         [SerializeField] private GameObject MedkitPrefab;
-        [SerializeField] private int MaxHealth;
+        [FormerlySerializedAs("MaxHealth")][SerializeField] private int _maxHealth;
+        [SerializeField] private EnemyManager _enemyManager;
         private int Health;
 
         private Vector3 medOffset = new Vector3 (0,0.5f,0);
@@ -19,10 +21,14 @@ namespace MyCharacterInput
         private Color ogColor;
         protected bool isDmgd = false;
 
+        private bool _dead = false;
+
         void Start()
         {
-            Health = MaxHealth;
+            Health = _maxHealth;
             meshRenderer = GetComponent<MeshRenderer>();
+            GameObject foundObject = GameObject.Find("EnemyManager");
+            _enemyManager = foundObject.GetComponent<EnemyManager>();
             if (meshRenderer != null)
             {
                 ogColor = meshRenderer.material.color;
@@ -31,10 +37,12 @@ namespace MyCharacterInput
 
         public void OnDMG(int Damage)
         {
+            if (_dead) return;
             Health -= Damage;
             StartCoroutine(DamageFlash());
             if (Health <= 0)
             {
+                _dead = true;
                 Die();
             }
         }
@@ -56,8 +64,14 @@ namespace MyCharacterInput
 
         private void Die()
         {
+            _enemyManager.OnDeath();
             Instantiate(MedkitPrefab, AgentCharacter.transform.position-medOffset, AgentCharacter.transform.rotation);
-            Destroy(gameObject);
+            StartCoroutine(DestroyGameObject());
+        }
+        IEnumerator DestroyGameObject()
+        {
+            yield return new WaitForSeconds(0.3f);
+            Destroy(transform.parent.gameObject);
         }
     }
 }

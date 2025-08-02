@@ -4,18 +4,21 @@ namespace MyCharacterInput
 {
     public class PlayerHealth : MonoBehaviour
     {
-        [SerializeField] public int MaxHealth;
-        [SerializeField] public int Health;
+        
         [SerializeField] PlayerHUD PlayerHUD;
 
-        [SerializeField] public CharacterManager characterManager;
+        public CharacterManager CharacterManager;
+        public int MaxHealth;
+        public int Health;
 
-
+        //Set CharacterManager and make sure health is at its Max
         private void Awake()
         {
             Health = MaxHealth;
-            characterManager = this.transform.parent.parent.GetComponent<CharacterManager>();
+            CharacterManager = this.transform.parent.parent.GetComponent<CharacterManager>();
         }
+
+        //Take damage function
         public void OnDMG(int Damage)
         {
             Health -= Damage;
@@ -26,6 +29,7 @@ namespace MyCharacterInput
             }
         }
 
+        //Heal player
         public void OnHeal(int Heal)
         {
             Health += Heal;
@@ -36,9 +40,10 @@ namespace MyCharacterInput
             PlayerHUD.OnHealthUpdated();
         }
 
+        //Death activates menus
         private void Die()
         {
-            characterManager.ResetMenu();
+            CharacterManager.ResetMenu();
             Destroy(this.transform.parent.gameObject);
         }
     }

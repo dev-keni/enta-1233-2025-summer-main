@@ -10,29 +10,35 @@ public class AgentMoveToTransform : AIBulletManager
     [SerializeField] private GameObject AgentWeapon;
     [SerializeField] private GameObject Target;
 
-    private Vector3 AgentLocation;
-    private float DetectionRadius = 10.0f;
-    private bool PlayerDetected = false;
+    private Vector3 _agentLocation;
+    private float _detectionRadius = 30.0f;
+    private bool _playerDetected = false;
 
-    private float BulletDelay = 1.5f;
-    private float Cooldown = 0f;
+    private float _bulletDelay = 1.5f;
+    private float _cooldown = 0f;
 
+    void Awake()
+    {
+        GameObject foundObject = GameObject.Find("MoveToLocator");
+        MoveTo = foundObject.GetComponent<Transform>();
+    }
+
+    //
     void Update()
     {
         Vector3 pos = Vector3.down;
-        AgentLocation = AgentCharacter.transform.position;
-        DetectPlayer(AgentLocation, DetectionRadius);
-        if (PlayerDetected)
+        _agentLocation = AgentCharacter.transform.position;
+        DetectPlayer(_agentLocation, _detectionRadius);
+        if (_playerDetected)
         {
-            Cooldown -= Time.deltaTime;
+            _cooldown -= Time.deltaTime;
             //Debug.Log(Cooldown);
             Agent.destination = PlayerLocatorSingleton.Instance.transform.position;
-            if (Cooldown <= 0f)
+            if (_cooldown <= 0f)
             {
                 Fire(AgentWeapon.transform);
                 AgentWeapon.GetComponent<AudioSource>().Play();
-                //Debug.Log("SHOTTED");
-                Cooldown = BulletDelay;
+                _cooldown = _bulletDelay;
             }
         }
         else
@@ -40,6 +46,8 @@ public class AgentMoveToTransform : AIBulletManager
             Agent.destination = AgentCharacter.transform.position;
         }
     }
+
+    //Detect the player, then turn on chase
     void DetectPlayer(Vector3 center, float radius)
     {
         Collider[] hitColliders = Physics.OverlapSphere(center, radius);
@@ -47,18 +55,19 @@ public class AgentMoveToTransform : AIBulletManager
         {
             if (hitCollider.name == "ReplacedCharacter")
             {
-                PlayerDetected = true;
+                _playerDetected = true;
             }
             else
             {
-                PlayerDetected = false;
+                _playerDetected = false;
             }
         }
     }
 
+    //debug radius
     private void OnDrawGizmos()
     {
-        Gizmos.DrawSphere(AgentLocation, DetectionRadius);
+        Gizmos.DrawSphere(_agentLocation, _detectionRadius);
     }
 
 }

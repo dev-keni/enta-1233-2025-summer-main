@@ -12,13 +12,13 @@ namespace MyCharacterInput
 
         [SerializeField] private LayerMask RaycastMask;
 
-        private BaseBulletManager shooterManager;
+        private BaseBulletManager _shooterManager;
 
         private bool _hasHit = false;
 
         public void Initialize(BaseBulletManager manager)
         {
-            shooterManager = manager;
+            _shooterManager = manager;
         }
 
         void Start()
@@ -27,11 +27,12 @@ namespace MyCharacterInput
             rb.AddForce(transform.forward * ProjectileSpeed, ForceMode.Impulse);
         }
 
-        private void OnTriggerEnter(Collider other) //FOR MY OWN REFERENCE, NOT IN USE
+        //FOR MY OWN REFERENCE, NOT IN USE
+        private void OnTriggerEnter(Collider other)
         {
             if (_hasHit) return; 
 
-            shooterManager.SpawnParticle(transform.position, transform.rotation.eulerAngles);
+            _shooterManager.SpawnParticle(transform.position, transform.rotation.eulerAngles);
             AiPlayerController eHealth = other.GetComponentInParent<AiPlayerController>();
             if (eHealth != null)
             {
@@ -52,7 +53,7 @@ namespace MyCharacterInput
         {
             if (_hasHit) return;
             //Debug.Log(collision.collider);
-            shooterManager.SpawnParticle(transform.position, transform.rotation.eulerAngles);
+            _shooterManager.SpawnParticle(transform.position, transform.rotation.eulerAngles);
             AiPlayerController eHealth = collision.collider.GetComponentInParent<AiPlayerController>();
             if (eHealth != null)
             {
