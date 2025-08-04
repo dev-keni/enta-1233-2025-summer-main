@@ -7,6 +7,7 @@ using UnityEngine.UI;
 
 public class MainMenu : MonoBehaviour
 {
+    public float GameVolume = 1.0f;
     //Screens
     [SerializeField] private Canvas _main;
     [FormerlySerializedAs("Controls")] [SerializeField] private Canvas _controls;
@@ -24,6 +25,7 @@ public class MainMenu : MonoBehaviour
     //Settings Buttons
     [SerializeField] private Button _settingsBack;
     [SerializeField] private Button _menuBack;
+    [SerializeField] private Slider _slider;
 
     //Quit Buttons
     [FormerlySerializedAs("Quit")] [SerializeField] private Button _quit;
@@ -91,6 +93,11 @@ public class MainMenu : MonoBehaviour
         _mainMenu.SetActive(false);
         _eventSystem.SetActive(false);
         _menuCamera.SetActive(false);
+    }
+
+    public void ChangeVolume()
+    {
+        GameVolume = _slider.value;
     }
 
     //Close game

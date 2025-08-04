@@ -85,7 +85,7 @@ namespace MyCharacterInput {
         {
             _scoreText.text = $"{score} Pills killed";
         }
-
+        
         //Close game
         void QuitGame()
         {

@@ -15,6 +15,7 @@ public class CharacterManager : MonoBehaviour
     {
         Vector3 spawnPosition = new Vector3(-3.17000008f, 1.61314762f, 19.2000008f);
         CurrentCharacter = Instantiate(_characterPrefab, spawnPosition, Quaternion.identity, transform);
+        AudioListener.volume = _mainMenu.GetComponent<MainMenu>().GameVolume;
     }
 
     //Unloads the level and turns the menu back on

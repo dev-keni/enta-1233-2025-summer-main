@@ -4022,7 +4022,19 @@ MonoBehaviour:
   m_Value: 0
   m_OnValueChanged:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1556487933}
+        m_TargetAssemblyTypeName: MainMenu, Assembly-CSharp
+        m_MethodName: ChangeVolume
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &1490537773
 GameObject:
   m_ObjectHideFlags: 0
@@ -4330,6 +4342,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b9b5f0bdc43cfde4882e313740b8f5e2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  GameVolume: 1
   _main: {fileID: 1300175745}
   _controls: {fileID: 1852009189}
   _settingsScreen: {fileID: 1143938246}
@@ -4340,6 +4353,7 @@ MonoBehaviour:
   _settings: {fileID: 1961524617}
   _settingsBack: {fileID: 1490537775}
   _menuBack: {fileID: 687095683}
+  _slider: {fileID: 1429644460}
   _quit: {fileID: 395846843}
   _gameOverQuit: {fileID: 1569034650}
   _gameManager: {fileID: 833148407}
